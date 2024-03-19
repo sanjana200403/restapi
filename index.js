@@ -1,7 +1,9 @@
+require('dotenv').config()
 const express = require('express')
 const members = require('./Member')
 const app = express()
-const PORT = 3000
+const PORT = process.env.PORT || 4000
+
 app.use(express.json())
 app.get('/users',(req,res)=>{
     try{
