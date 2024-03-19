@@ -8,7 +8,7 @@ app.use(express.json())
 app.get('/users',(req,res)=>{
     try{
 
-        res.status(200).json(member)
+        res.status(200).json(members)
     }catch(err){
         res.status(500).json({msg:"something wrong"})
     }
@@ -20,11 +20,11 @@ app.get('/users/:id',(req,res)=>{
         console.log(req.params)
 
         const id= +req.params.id
-        const found = member.some((item)=>item.id===id)
+        const found = members.some((item)=>item.id===id)
         console.log(found,"particular")
         if(found){
-            const members = member.filter((member)=>member.id===id)
-            res.status(200).json(members)
+            const newmembers = members.filter((member)=>member.id===id)
+            res.status(200).json(newmembers)
         }
 
 
@@ -34,14 +34,14 @@ app.get('/users/:id',(req,res)=>{
 })
 app.post('/user',(req,res)=>{
     const {id,name,email} = req.body
-    member.push({id,name,email})
-    res.status(200).json(member)
+    members.push({id,name,email})
+    res.status(200).json(members)
 })
 app.delete('/user/:id',(req,res)=>{
     const id = +req.params.id
-    const found = member.some((mem)=>mem.id===id)
+    const found = members.some((mem)=>mem.id===id)
     if(found){
-        const mem = member.filter((mem)=>mem.id !== id)
+        const mem = members.filter((mem)=>mem.id !== id)
         res.status(200).json(mem)
     }
     else{
